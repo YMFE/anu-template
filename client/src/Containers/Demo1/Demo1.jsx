@@ -1,11 +1,9 @@
 import './Demo1.scss';
-import React, { Component } from 'react';
+import { React, Component } from '../Public.js';
 import { connect } from 'react-redux';
 import {
   fetchAllRepo,
 } from '../../Actions/Index.js';
-
-console.log('connect', connect)
 
 const infos = (
   <ol>
@@ -35,12 +33,6 @@ const element = (
   </div>
 )
 
-// @connect(
-//   state => ({
-    
-//   }),
-//   {}
-// )
 class Demo1 extends Component {
   // static propTypes = {
   //   publicList: PropTypes.string,

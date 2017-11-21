@@ -10,9 +10,7 @@ let store = createStore(todoApp);
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={hashHistory}>
-      {Routes(store)}
-    </Router>
+    {Routes(store)}
   </Provider>,
   document.querySelector('#app')
 );
