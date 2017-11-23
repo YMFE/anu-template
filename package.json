@@ -1,19 +1,30 @@
 {
-  "name": "@qnpm/qreact-cli",
-  "version": "1.1.7",
-  "description": "a mini React-like framework",
+  "name": "anu-template",
+  "version": "0.0.1",
+  "description": "anu-template",
   "main": "dist/React.js",
   "bin": {
     "qreact": "bin/qreact",
     "qreact-init": "bin/qreact-init"
   },
   "scripts": {
-    "start": "webpack-dev-server --inline --content-base . --history-api-fallback",
-    "build": "webpack --config webpack/dev.config.js"
+    "start": "webpack-dev-server --inline --content-base --history-api-fallback",
+    "build": "npm run build:prod",
+    "build:dist": "better-npm-run build:dist",
+    "build:prod": "better-npm-run build:prod"
+  },
+  "betterScripts": {
+    "build:dist": "webpack --config webpack.dev.config --progress --colors",
+    "build:prod": {
+      "command": "webpack --config webpack.pre.config --progress --colors",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RubyLouvre/anu.git"
+    "url": "git@github.com:YMFE/anu-template.git"
   },
   "keywords": [
     "react-like",
@@ -26,7 +37,7 @@
     "ie8"
   ],
   "author": "RubyLouvre",
-  "license": "Apache License 2.0",
+  "license": "",
   "bugs": {
     "url": "https://github.com/RubyLouvre/anu/issues"
   },
@@ -55,6 +66,7 @@
     "babel-preset-stage-3": "^6.24.1",
     "babel-register": "^6.9.0",
     "babel-runtime": "^6.9.2",
+    "better-npm-run": "^0.1.0",
     "bundle-loader": "^0.5.5",
     "chai": "^3.5.0",
     "css-loader": "^0.28.7",
