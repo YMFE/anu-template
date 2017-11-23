@@ -1,14 +1,14 @@
 {
-  "name": "@qnpm/qreact-cli",
-  "version": "1.1.7",
-  "description": "a mini React-like framework",
+  "name": "anu-template",
+  "version": "0.0.1",
+  "description": "anu-template",
   "main": "dist/React.js",
   "bin": {
     "qreact": "bin/qreact",
     "qreact-init": "bin/qreact-init"
   },
   "scripts": {
-    "start": "webpack-dev-server --inline --content-base . --history-api-fallback && npm run build:dist",
+    "start": "webpack-dev-server --inline --content-base --history-api-fallback",
     "build": "npm run build:prod",
     "build:dist": "better-npm-run build:dist",
     "build:prod": "better-npm-run build:prod"
@@ -24,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RubyLouvre/anu.git"
+    "url": "git@github.com:YMFE/anu-template.git"
   },
   "keywords": [
     "react-like",
@@ -37,7 +37,7 @@
     "ie8"
   ],
   "author": "RubyLouvre",
-  "license": "Apache License 2.0",
+  "license": "",
   "bugs": {
     "url": "https://github.com/RubyLouvre/anu/issues"
   },
