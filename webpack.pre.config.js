@@ -68,6 +68,17 @@ module.exports = {
       // 公共文件也必须在在这里打包 否则公共文件会出现在其他文件里
       names: ['commons', 'public']
     }),
+
+    new webpack.optimize.UglifyJsPlugin({
+      // beautify
+      //  true: 美化代码输出
+      //  false: 压缩代码 会删除部分注释 
+      beautify: false,
+      // comments
+      //  true: 保留所有注释
+      //  false: 删除所有注释
+      comments: false
+    }),
   ],
 
   resolve: {
