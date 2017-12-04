@@ -25,7 +25,6 @@ class Demo1 extends Component {
 
   componentWillMount () {
     this.props.fetchAllRepo()
-    console.log('mou', this.props.publicList)
     axios
       .get('http://localhost:3000/index')
       .then(res => {
