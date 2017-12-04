@@ -1,13 +1,19 @@
+require('babel-register')
+require('babel-polyfill')
 const webpack = require('webpack')
 const path = require('path')
 const alias = require('./webpack/alias')
 
+const Webpack_isomorphic_tools_plugin = require('webpack-isomorphic-tools/plugin');
+const webpack_isomorphic_tools_plugin =
+new Webpack_isomorphic_tools_plugin(require('./webpack-isomorphic-tools-configuration')).development()
+
 module.exports = {
   // context: 如果不通过path.resolve 配置入口访问路径 watch: true失效
-  context: path.resolve('./client'),
+  context: path.resolve('./server'),
 
   entry: {
-    index: './src/client.js',
+    index: './app.js',
     public: ['anujs', 'react-router']
   },
 
@@ -16,12 +22,6 @@ module.exports = {
     // 包存放的目录
     path: path.resolve('./dist'),
     chunkFilename: '[name].[chunkhash:5].chunk.js',
-  },
-  // target: 'node',
-  // externals: [nodeExternals()],
-  // 服务器地址默认访问的文件路径
-  devServer: {
-    contentBase: './client'
   },
   module: {
     rules: [
@@ -74,6 +74,11 @@ module.exports = {
       PRODUCTION: JSON.stringify(__dirname + '/'),
       ARRAY: JSON.stringify([1, 2, 3])
     }),
+
+    webpack_isomorphic_tools_plugin,
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin()
   ],
 
   resolve: {

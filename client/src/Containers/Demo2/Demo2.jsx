@@ -5,7 +5,7 @@ const user = {
   firstName: 'qreact',
   lastName: 'anujs',
 }
-const setName = ( {firstName = '', lastName = ''} ) => `firstName: ${firstName} - lastName: ${lastName}` 
+const setName = ({firstName, lastName}) => `firstName: ${firstName} - lastName: ${lastName}` 
 const html = <p>{setName(user)}</p>
 const element = (
   <div>
@@ -17,7 +17,7 @@ const element = (
 
 class Demo2 extends Component {
   render () {
-    return <div>{element}</div>
+    return <div>333333</div>
   }
 }
 

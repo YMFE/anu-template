@@ -1,5 +1,5 @@
 import './App.scss';
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react'
 import { IndexRoute, Route, Link } from 'react-router';
 
 class App extends Component {
@@ -17,3 +17,4 @@ class App extends Component {
 }
 
 export default App;
+
