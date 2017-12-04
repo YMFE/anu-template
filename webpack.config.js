@@ -29,10 +29,7 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['es2015', 'stage-3', 'react']
-          }              
+          loader: 'babel-loader'             
         }
       },
       {
