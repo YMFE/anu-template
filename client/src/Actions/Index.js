@@ -1,8 +1,8 @@
 import { FETCH_REPOS } from '../constants/actionTypes';
 
-export function fetchAllRepo(pageNum, pageSize) {
+export function fetchAllRepo() {
   return {
     type: FETCH_REPOS,
-    payload: `我的天空`,
+    payload: fetch('http://localhost:3000/index', {method: 'GET'})  
   };
 }

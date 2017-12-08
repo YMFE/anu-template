@@ -1,5 +1,6 @@
 const webpack = require('webpack')
 const path = require('path')
+const alias = require('./webpack/alias')
 
 module.exports = {
   // context: 如果不通过path.resolve 配置入口访问路径 watch: true失效
@@ -28,10 +29,7 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['es2015', 'stage-3', 'react']
-          }              
+          loader: 'babel-loader'             
         }
       },
       {
@@ -68,23 +66,15 @@ module.exports = {
       // 公共文件也必须在在这里打包 否则公共文件会出现在其他文件里
       names: ['commons', 'public']
     }),
+
+    new webpack.DefinePlugin({
+      PRODUCTION: JSON.stringify(__dirname + '/'),
+      ARRAY: JSON.stringify([1, 2, 3])
+    }),
   ],
 
   resolve: {
-     alias: {
-      'react': 'anujs',
-      'react-dom': 'anujs',
-        // 若要兼容 IE 请使用以下配置
-        'ReactIE': 'anujs/dist/ReactIE',
-        // 'react-dom': 'anujs/dist/ReactIE',
-        // 'redux': 'anujs/lib/ReduxIE',//这主要用于IE6－8，因为官方源码中的isPlainObject方法性能超差
-        // 如果引用了 prop-types 或 create-react-class
-        // 需要添加如下别名
-        'prop-types': 'anujs/lib/ReactPropTypes',
-        // 'create-react-class': 'anujs/lib/createClass'
-        //如果你在移动端用到了onTouchTap事件
-        // 'react-tap-event-plugin': 'anujs/lib/injectTapEventPlugin',
-     }
+     alias,
   },
 }
 
