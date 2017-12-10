@@ -25,18 +25,9 @@ class Demo1 extends Component {
 
   componentWillMount () {
     this.props.fetchAllRepo()
-    axios
-      .get('http://localhost:3000/index')
-      .then(res => {
-        this.setState({ infos: res.data })
-      })
   }
 
   render () {
-    const { infos } = this.state
-    const { publicList } = this.props
-    const createMarkup = () => ( {__html: infos} )
-
     return (
       <div>
         <h1>欢迎使用 Qreact</h1>
