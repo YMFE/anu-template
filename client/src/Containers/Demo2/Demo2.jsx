@@ -17,7 +17,7 @@ const element = (
 
 class Demo2 extends Component {
   render () {
-    return <div>333333</div>
+    return <div>Qreact Author: 司徒正美</div>
   }
 }
 
