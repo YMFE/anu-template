@@ -1,6 +1,9 @@
 const webpack = require('webpack')
 const path = require('path')
-
+const ip = require('ip')
+const portfinder = require('portfinder')
+// 通过portfinder获取可用端口
+const port = ()=>{portfinder.getPort(function (err,port) {return port})};
 module.exports = {
   // context: 如果不通过path.resolve 配置入口访问路径 watch: true失效
   context: path.resolve('./client'),
@@ -20,6 +23,8 @@ module.exports = {
   // externals: [nodeExternals()],
   // 服务器地址默认访问的文件路径
   devServer: {
+    host:ip.address(),
+    port:port(),
     contentBase: './client'
   },
   module: {
