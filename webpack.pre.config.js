@@ -1,6 +1,11 @@
 const webpack = require('webpack')
 const path = require('path')
-
+const ip = require('ip')
+const portfinder = require('portfinder')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+// 通过portfinder获取可用端口
+const port = ()=>{portfinder.getPort(function (err,port) {return port})};
 module.exports = {
   // context: 如果不通过path.resolve 配置入口访问路径 watch: true失效
   context: path.resolve('./client'),
@@ -20,6 +25,8 @@ module.exports = {
   // externals: [nodeExternals()],
   // 服务器地址默认访问的文件路径
   devServer: {
+    host:ip.address(),
+    port:port(),
     contentBase: './client'
   },
   module: {
@@ -36,13 +43,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: [{
-            loader: "style-loader" // creates style nodes from JS strings 
-        }, {
-            loader: "css-loader" // translates CSS into CommonJS 
-        }, {
-            loader: "sass-loader" // compiles Sass to CSS 
-        }]
+        loader: ExtractTextPlugin.extract({fallback:"style-loader", use:["css-loader","sass-loader"]}),
       },
       {
         test: /\.bundle\.js$/, // 通过文件名后缀自动处理需要转成bundle的文件
@@ -68,7 +69,6 @@ module.exports = {
       // 公共文件也必须在在这里打包 否则公共文件会出现在其他文件里
       names: ['commons', 'public']
     }),
-
     new webpack.optimize.UglifyJsPlugin({
       // beautify
       //  true: 美化代码输出
@@ -79,6 +79,23 @@ module.exports = {
       //  false: 删除所有注释
       comments: false
     }),
+    // 提取html文件到输出文件目录下
+    new HtmlWebpackPlugin({
+        template: 'index.html',
+        filename: 'index.html'
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': '"production"'
+      }
+    }),
+    // 压缩css
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false
+    }),
+    // 单独提取scss
+    new ExtractTextPlugin({filename:"[name].css"}),
   ],
 
   resolve: {
