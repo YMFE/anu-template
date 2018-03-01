@@ -3,6 +3,7 @@ const path = require('path')
 const alias = require('./webpack/alias')
 const ip = require('ip')
 const portfinder = require('portfinder')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 // 通过portfinder获取可用端口
 const port = ()=>{portfinder.getPort(function (err,port) {return port})};
 module.exports = {
@@ -75,6 +76,11 @@ module.exports = {
     new webpack.DefinePlugin({
       PRODUCTION: JSON.stringify(__dirname + '/'),
       ARRAY: JSON.stringify([1, 2, 3])
+    }),
+    // index.html文件可不需要手动引入JS(如：index.js和public.js)文件
+    new HtmlWebpackPlugin({
+        template: 'index.html',
+        filename: 'index.html'
     }),
   ],
 
